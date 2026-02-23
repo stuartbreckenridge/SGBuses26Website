@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Singapore Buses — Your Ultimate Bus Companion</title>
+  <meta name="description" content="Real-time bus arrivals, interactive maps, route exploration, and more. Singapore Buses is your ultimate companion for navigating Singapore's bus network.">
+  <meta property="og:title" content="Singapore Buses">
+  <meta property="og:description" content="Your Ultimate Bus Companion for Singapore">
+  <meta property="og:image" content="Icon/400x400bb-75.webp">
+  <style>
+    /* =====================================================================
+       APPLE HIG DESIGN TOKENS
+       ===================================================================== */
+    :root {
+      --font-system: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+
+      /* iOS Typography */
+      --text-caption2: 11px;
+      --text-caption1: 12px;
+      --text-footnote: 13px;
+      --text-subhead: 15px;
+      --text-callout: 16px;
+      --text-body: 17px;
+      --text-headline: 17px;
+      --text-title3: 20px;
+      --text-title2: 22px;
+      --text-title1: 28px;
+      --text-large-title: 34px;
+      --text-display-sm: 48px;
+      --text-display-md: 64px;
+
+      /* Font weights */
+      --font-regular: 400;
+      --font-medium: 500;
+      --font-semibold: 600;
+      --font-bold: 700;
+      --font-heavy: 800;
+
+      /* Line heights */
+      --lh-tight: 1.1;
+      --lh-snug: 1.2;
+      --lh-normal: 1.4;
+      --lh-relaxed: 1.5;
+
+      /* System Colors — Light */
+      --system-blue: #007AFF;
+      --system-green: #34C759;
+      --system-orange: #FF9500;
+      --system-red: #FF3B30;
+      --system-yellow: #FFCC00;
+      --system-gray: #8E8E93;
+      --system-gray2: #AEAEB2;
+      --system-gray3: #C7C7CC;
+      --system-gray4: #D1D1D6;
+      --system-gray5: #E5E5EA;
+      --system-gray6: #F2F2F7;
+
+      /* App brand colours */
+      --brand-orange: #FF9500;
+      --brand-dark: #2C2C2E;
+      --brand-yellow: #FFD60A;
+
+      /* Labels */
+      --label-primary: #000000;
+      --label-secondary: rgba(60, 60, 67, 0.6);
+      --label-tertiary: rgba(60, 60, 67, 0.3);
+
+      /* Backgrounds */
+      --bg-primary: #FFFFFF;
+      --bg-secondary: #F2F2F7;
+      --bg-tertiary: #FFFFFF;
+
+      /* Separators */
+      --separator: rgba(60, 60, 67, 0.29);
+
+      /* Spacing (8pt grid) */
+      --sp-1: 4px;   --sp-2: 8px;   --sp-3: 12px;
+      --sp-4: 16px;  --sp-5: 20px;  --sp-6: 24px;
+      --sp-8: 32px;  --sp-10: 40px; --sp-12: 48px;
+      --sp-16: 64px; --sp-20: 80px; --sp-24: 96px;
+
+      /* Border radius */
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 20px;
+      --radius-2xl: 24px;
+      --radius-3xl: 32px;
+      --radius-full: 9999px;
+
+      /* Shadows */
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.08);
+      --shadow-md: 0 4px 12px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.06);
+      --shadow-lg: 0 12px 28px rgba(0,0,0,.10), 0 4px 8px rgba(0,0,0,.08);
+      --shadow-xl: 0 24px 48px rgba(0,0,0,.14), 0 8px 16px rgba(0,0,0,.10);
+      --shadow-phone: 0 40px 80px rgba(0,0,0,.30), 0 16px 32px rgba(0,0,0,.18);
+
+      /* Transitions */
+      --ease-out: cubic-bezier(0, 0, 0.58, 1);
+      --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      --dur-fast: 150ms;
+      --dur-normal: 250ms;
+      --dur-slow: 400ms;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --system-blue: #0A84FF;
+        --system-green: #30D158;
+        --system-orange: #FF9F0A;
+        --system-red: #FF453A;
+        --system-yellow: #FFD60A;
+        --system-gray: #8E8E93;
+        --system-gray2: #636366;
+        --system-gray3: #48484A;
+        --system-gray4: #3A3A3C;
+        --system-gray5: #2C2C2E;
+        --system-gray6: #1C1C1E;
+        --label-primary: #FFFFFF;
+        --label-secondary: rgba(235, 235, 245, 0.6);
+        --label-tertiary: rgba(235, 235, 245, 0.3);
+        --bg-primary: #000000;
+        --bg-secondary: #1C1C1E;
+        --bg-tertiary: #2C2C2E;
+        --separator: rgba(84, 84, 88, 0.6);
+        --shadow-sm: 0 1px 3px rgba(0,0,0,.4);
+        --shadow-md: 0 4px 12px rgba(0,0,0,.4);
+        --shadow-lg: 0 12px 28px rgba(0,0,0,.5);
+        --shadow-xl: 0 24px 48px rgba(0,0,0,.6);
+      }
+    }
+
+    /* =====================================================================
+       BASE RESET
+       ===================================================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      font-family: var(--font-system);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-size: var(--text-body);
+      color: var(--label-primary);
+      background: var(--bg-primary);
+      overflow-x: hidden;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; font-family: inherit; border: none; background: none; -webkit-tap-highlight-color: transparent; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    ::selection { background: rgba(255,149,0,.25); }
+
+    /* =====================================================================
+       NAVIGATION
+       ===================================================================== */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--sp-6);
+      height: 64px;
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 0.5px solid var(--separator);
+      transition: background var(--dur-normal) var(--ease-out);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .nav { background: rgba(0,0,0,0.82); }
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-3);
+    }
+
+    .nav-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .nav-icon img { width: 100%; height: 100%; object-fit: cover; }
+
+    .nav-title {
+      font-size: var(--text-headline);
+      font-weight: var(--font-semibold);
+      color: var(--label-primary);
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-2);
+      height: 36px;
+      padding: 0 var(--sp-5);
+      font-size: var(--text-subhead);
+      font-weight: var(--font-semibold);
+      color: #fff;
+      background: var(--brand-orange);
+      border-radius: var(--radius-full);
+      transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+    }
+
+    .nav-cta:hover { opacity: 0.88; }
+    .nav-cta:active { transform: scale(0.97); }
+
+    /* =====================================================================
+       HERO
+       ===================================================================== */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: calc(64px + var(--sp-20)) var(--sp-6) var(--sp-20);
+      background: var(--bg-secondary);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Gradient blobs */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      left: -15%;
+      width: 60%;
+      height: 60%;
+      background: radial-gradient(ellipse, rgba(255,149,0,.22) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -10%;
+      right: -10%;
+      width: 55%;
+      height: 55%;
+      background: radial-gradient(ellipse, rgba(255,214,10,.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 640px;
+    }
+
+
+    .hero-title {
+      font-size: clamp(var(--text-large-title), 6vw, var(--text-display-md));
+      font-weight: var(--font-heavy);
+      line-height: var(--lh-tight);
+      letter-spacing: -0.03em;
+      color: var(--label-primary);
+      margin-bottom: var(--sp-5);
+    }
+
+    .hero-title .accent {
+      background: linear-gradient(135deg, var(--brand-orange) 0%, var(--brand-yellow) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: var(--text-title3);
+      font-weight: var(--font-regular);
+      color: var(--label-secondary);
+      line-height: var(--lh-relaxed);
+      max-width: 480px;
+      margin: 0 auto var(--sp-10);
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--sp-3);
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-2);
+      min-height: 52px;
+      padding: 0 var(--sp-8);
+      font-size: var(--text-body);
+      font-weight: var(--font-semibold);
+      color: #fff;
+      background: var(--brand-orange);
+      border-radius: var(--radius-full);
+      box-shadow: 0 4px 16px rgba(255,149,0,.35);
+      transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+      box-shadow: 0 6px 24px rgba(255,149,0,.45);
+    }
+
+    .btn-primary:active { transform: scale(0.97); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-2);
+      min-height: 52px;
+      padding: 0 var(--sp-8);
+      font-size: var(--text-body);
+      font-weight: var(--font-semibold);
+      color: var(--brand-orange);
+      background: rgba(255,149,0,.1);
+      border-radius: var(--radius-full);
+      transition: background var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+    }
+
+    .btn-secondary:hover { background: rgba(255,149,0,.16); }
+    .btn-secondary:active { transform: scale(0.97); }
+
+    /* App Store badge */
+    .appstore-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-3);
+      height: 52px;
+      padding: 0 var(--sp-5);
+      background: var(--label-primary);
+      color: var(--bg-primary);
+      border-radius: 14px;
+      transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+    }
+
+    .appstore-badge:hover { opacity: 0.85; }
+    .appstore-badge:active { transform: scale(0.97); }
+
+    .appstore-badge-icon { font-size: 28px; line-height: 1; }
+
+    .appstore-badge-text { text-align: left; }
+    .appstore-badge-text .label { font-size: 10px; font-weight: var(--font-regular); opacity: .75; letter-spacing: 0.04em; }
+    .appstore-badge-text .store { font-size: var(--text-body); font-weight: var(--font-semibold); }
+
+    /* Hero phone mockup */
+    .hero-phone-wrap {
+      position: relative;
+      z-index: 1;
+      margin-top: var(--sp-16);
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      align-items: flex-end;
+    }
+
+    .phone-mockup {
+      position: relative;
+      width: 220px;
+      flex-shrink: 0;
+      filter: drop-shadow(var(--shadow-phone));
+      transition: transform var(--dur-slow) var(--ease-out);
+    }
+
+    .phone-mockup.center {
+      width: 260px;
+      z-index: 2;
+    }
+
+    .phone-mockup.side {
+      opacity: 0.75;
+    }
+
+    .phone-mockup:hover { transform: translateY(-8px) rotate(-1deg); }
+    .phone-mockup.center:hover { transform: translateY(-12px) rotate(0deg); }
+
+    .phone-mockup img {
+      width: 100%;
+      height: auto;
+      border-radius: 38px;
+    }
+
+    @media (max-width: 640px) {
+      .phone-mockup.side { display: none; }
+      .phone-mockup.center { width: 260px; }
+    }
+
+    /* =====================================================================
+       SECTION WRAPPER
+       ===================================================================== */
+    .section {
+      padding: var(--sp-24) var(--sp-6);
+    }
+
+    .section-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .section-eyebrow {
+      font-size: var(--text-footnote);
+      font-weight: var(--font-semibold);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--brand-orange);
+      margin-bottom: var(--sp-3);
+    }
+
+    .section-title {
+      font-size: clamp(var(--text-title1), 4vw, 44px);
+      font-weight: var(--font-bold);
+      letter-spacing: -0.025em;
+      line-height: var(--lh-snug);
+      color: var(--label-primary);
+      margin-bottom: var(--sp-4);
+    }
+
+    .section-body {
+      font-size: var(--text-title3);
+      color: var(--label-secondary);
+      line-height: var(--lh-relaxed);
+      max-width: 520px;
+    }
+
+    .section-body.centered { margin: 0 auto; text-align: center; }
+
+    /* =====================================================================
+       FEATURE STRIP (STATS)
+       ===================================================================== */
+    .stats {
+      background: var(--label-primary);
+      color: var(--bg-primary);
+      padding: var(--sp-12) var(--sp-6);
+    }
+
+    .stats-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--sp-8);
+      text-align: center;
+    }
+
+    .stat-item {}
+
+    .stat-value {
+      font-size: 48px;
+      font-weight: var(--font-heavy);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: var(--sp-2);
+      background: linear-gradient(135deg, var(--brand-orange), var(--brand-yellow));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .stat-label {
+      font-size: var(--text-subhead);
+      opacity: 0.7;
+    }
+
+    @media (max-width: 560px) {
+      .stats-inner { grid-template-columns: 1fr; gap: var(--sp-10); }
+    }
+
+    /* =====================================================================
+       FEATURES GRID
+       ===================================================================== */
+    .features-section {
+      background: var(--bg-secondary);
+    }
+
+    .features-header {
+      text-align: center;
+      margin-bottom: var(--sp-16);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--sp-4);
+    }
+
+    .feature-card {
+      background: var(--bg-tertiary);
+      border-radius: var(--radius-2xl);
+      padding: var(--sp-8);
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--dur-normal) var(--ease-out), box-shadow var(--dur-normal) var(--ease-out);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .feature-icon-wrap {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      margin-bottom: var(--sp-5);
+      flex-shrink: 0;
+    }
+
+    .feature-name {
+      font-size: var(--text-headline);
+      font-weight: var(--font-semibold);
+      color: var(--label-primary);
+      margin-bottom: var(--sp-2);
+    }
+
+    .feature-desc {
+      font-size: var(--text-subhead);
+      color: var(--label-secondary);
+      line-height: var(--lh-relaxed);
+    }
+
+    /* =====================================================================
+       SHOWCASE — ALTERNATING FEATURE SPOTLIGHTS
+       ===================================================================== */
+    .showcase-section {
+      background: var(--bg-primary);
+    }
+
+    .showcase-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-16);
+      align-items: center;
+      margin-bottom: var(--sp-24);
+    }
+
+    .showcase-row:last-child { margin-bottom: 0; }
+
+    .showcase-row.reverse { direction: rtl; }
+    .showcase-row.reverse > * { direction: ltr; }
+
+    .showcase-text {}
+
+    .showcase-title {
+      font-size: clamp(var(--text-title1), 3vw, 40px);
+      font-weight: var(--font-bold);
+      letter-spacing: -0.025em;
+      line-height: var(--lh-snug);
+      color: var(--label-primary);
+      margin-bottom: var(--sp-4);
+    }
+
+    .showcase-desc {
+      font-size: var(--text-body);
+      color: var(--label-secondary);
+      line-height: var(--lh-relaxed);
+      margin-bottom: var(--sp-6);
+    }
+
+    .showcase-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-2);
+      height: 30px;
+      padding: 0 var(--sp-3);
+      font-size: var(--text-footnote);
+      font-weight: var(--font-semibold);
+      border-radius: var(--radius-full);
+      margin-right: var(--sp-2);
+      margin-bottom: var(--sp-2);
+    }
+
+    .showcase-phone {
+      display: flex;
+      justify-content: center;
+    }
+
+    .showcase-phone img {
+      width: 260px;
+      height: auto;
+      border-radius: 38px;
+      box-shadow: var(--shadow-xl);
+      transition: transform var(--dur-slow) var(--ease-out);
+    }
+
+    .showcase-phone img:hover { transform: scale(1.03) rotate(1deg); }
+
+    @media (max-width: 768px) {
+      .showcase-row, .showcase-row.reverse {
+        grid-template-columns: 1fr;
+        direction: ltr;
+        gap: var(--sp-10);
+      }
+      .showcase-row.reverse .showcase-phone { order: -1; }
+      .showcase-phone img { width: 220px; }
+    }
+
+    /* =====================================================================
+       PLUS SECTION
+       ===================================================================== */
+    .plus-section {
+      background: var(--bg-secondary);
+    }
+
+    .plus-card {
+      background: var(--label-primary);
+      color: var(--bg-primary);
+      border-radius: var(--radius-3xl);
+      padding: var(--sp-16) var(--sp-12);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .plus-card::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      left: -20%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(ellipse, rgba(255,149,0,.3) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .plus-card::after {
+      content: '';
+      position: absolute;
+      bottom: -20%;
+      right: -10%;
+      width: 50%;
+      height: 70%;
+      background: radial-gradient(ellipse, rgba(255,214,10,.2) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .plus-card-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .plus-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-2);
+      height: 28px;
+      padding: 0 var(--sp-3);
+      font-size: var(--text-caption1);
+      font-weight: var(--font-semibold);
+      color: var(--brand-orange);
+      background: rgba(255,149,0,.2);
+      border-radius: var(--radius-full);
+      margin-bottom: var(--sp-5);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .plus-title {
+      font-size: clamp(var(--text-title1), 4vw, 52px);
+      font-weight: var(--font-heavy);
+      letter-spacing: -0.03em;
+      line-height: var(--lh-snug);
+      margin-bottom: var(--sp-5);
+      opacity: 1;
+    }
+
+    .plus-title .highlight {
+      background: linear-gradient(135deg, var(--brand-orange), var(--brand-yellow));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .plus-desc {
+      font-size: var(--text-title3);
+      opacity: 0.7;
+      line-height: var(--lh-relaxed);
+      max-width: 520px;
+      margin: 0 auto var(--sp-10);
+    }
+
+    .plus-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--sp-4);
+      margin-bottom: var(--sp-10);
+      text-align: left;
+    }
+
+    .plus-feature-item {
+      background: rgba(255,255,255,.08);
+      border-radius: var(--radius-xl);
+      padding: var(--sp-5);
+      border: 1px solid rgba(255,255,255,.12);
+    }
+
+    .plus-feature-icon {
+      font-size: 24px;
+      margin-bottom: var(--sp-3);
+    }
+
+    .plus-feature-name {
+      font-size: var(--text-headline);
+      font-weight: var(--font-semibold);
+      margin-bottom: var(--sp-1);
+    }
+
+    .plus-feature-desc {
+      font-size: var(--text-footnote);
+      opacity: 0.6;
+      line-height: var(--lh-relaxed);
+    }
+
+    @media (max-width: 600px) {
+      .plus-card { padding: var(--sp-12) var(--sp-6); }
+    }
+
+    /* =====================================================================
+       SCREENSHOTS CAROUSEL
+       ===================================================================== */
+    .screenshots-section {
+      background: var(--bg-primary);
+      overflow: hidden;
+    }
+
+    .screenshots-header {
+      text-align: center;
+      margin-bottom: var(--sp-12);
+    }
+
+    .screenshots-scroll {
+      display: flex;
+      gap: var(--sp-4);
+      overflow-x: auto;
+      padding: var(--sp-4) var(--sp-6) var(--sp-8);
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .screenshots-scroll::-webkit-scrollbar { display: none; }
+
+    .screenshot-item {
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+      width: 220px;
+      transition: transform var(--dur-normal) var(--ease-out);
+    }
+
+    .screenshot-item:hover { transform: translateY(-6px) scale(1.02); }
+
+    .screenshot-item img {
+      width: 100%;
+      height: auto;
+      border-radius: 32px;
+      box-shadow: var(--shadow-xl);
+    }
+
+    /* =====================================================================
+       FOOTER
+       ===================================================================== */
+    .footer {
+      background: var(--bg-secondary);
+      padding: var(--sp-16) var(--sp-6) var(--sp-10);
+      border-top: 0.5px solid var(--separator);
+    }
+
+    .footer-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: var(--sp-12);
+      margin-bottom: var(--sp-12);
+    }
+
+    .footer-brand {}
+
+    .footer-brand-row {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-3);
+      margin-bottom: var(--sp-4);
+    }
+
+    .footer-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .footer-logo img { width: 100%; height: 100%; object-fit: cover; }
+
+    .footer-brand-name {
+      font-size: var(--text-headline);
+      font-weight: var(--font-semibold);
+    }
+
+    .footer-tagline {
+      font-size: var(--text-subhead);
+      color: var(--label-secondary);
+      line-height: var(--lh-relaxed);
+      margin-bottom: var(--sp-6);
+    }
+
+    .footer-col-title {
+      font-size: var(--text-footnote);
+      font-weight: var(--font-semibold);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--label-secondary);
+      margin-bottom: var(--sp-4);
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-3);
+    }
+
+    .footer-links a {
+      font-size: var(--text-subhead);
+      color: var(--label-primary);
+      transition: color var(--dur-fast) var(--ease-out);
+    }
+
+    .footer-links a:hover { color: var(--brand-orange); }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--sp-4);
+      padding-top: var(--sp-6);
+      border-top: 0.5px solid var(--separator);
+    }
+
+    .footer-legal {
+      font-size: var(--text-caption1);
+      color: var(--label-tertiary);
+    }
+
+    .footer-legal-links {
+      display: flex;
+      gap: var(--sp-5);
+    }
+
+    .footer-legal-links a {
+      font-size: var(--text-caption1);
+      color: var(--label-secondary);
+      transition: color var(--dur-fast) var(--ease-out);
+    }
+
+    .footer-legal-links a:hover { color: var(--brand-orange); }
+
+    @media (max-width: 720px) {
+      .footer-top { grid-template-columns: 1fr; gap: var(--sp-8); }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* =====================================================================
+       SCROLL ANIMATIONS
+       ===================================================================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 80ms; }
+    .reveal-delay-2 { transition-delay: 160ms; }
+    .reveal-delay-3 { transition-delay: 240ms; }
+    .reveal-delay-4 { transition-delay: 320ms; }
+
+    /* =====================================================================
+       MISC
+       ===================================================================== */
+    .divider-line {
+      height: 0.5px;
+      background: var(--separator);
+    }
+
+    /* Live Activity pill preview */
+    .live-activity-preview {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-3);
+      padding: var(--sp-2) var(--sp-4);
+      background: rgba(0,0,0,.85);
+      border-radius: var(--radius-full);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,.12);
+      margin-bottom: var(--sp-6);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .live-activity-preview { background: rgba(44,44,46,.9); }
+    }
+
+    .la-icon { font-size: 20px; }
+
+    .la-info {}
+
+    .la-label {
+      font-size: var(--text-caption1);
+      color: rgba(255,255,255,.6);
+      font-weight: var(--font-medium);
+    }
+
+    .la-value {
+      font-size: var(--text-body);
+      color: #fff;
+      font-weight: var(--font-semibold);
+    }
+
+    .la-arrival {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-1);
+    }
+
+    .la-time {
+      font-size: var(--text-headline);
+      font-weight: var(--font-bold);
+      color: var(--system-green);
+    }
+
+    .la-unit {
+      font-size: var(--text-footnote);
+      color: rgba(255,255,255,.5);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =====================================================================
+       NAV
+       ===================================================================== -->
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav-brand">
+      <div class="nav-icon">
+        <img src="Icon/400x400bb-75.webp" alt="Singapore Buses app icon">
+      </div>
+      <span class="nav-title">Singapore Buses</span>
+    </div>
+    <a href="https://apps.apple.com/app/singapore-buses/id1455530808" class="nav-cta" aria-label="Download on the App Store">
+      Download Free
+    </a>
+  </nav>
+
+  <!-- =====================================================================
+       HERO
+       ===================================================================== -->
+  <section class="hero" aria-label="Hero">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        Your Ultimate<br>
+        <span class="accent">Bus Companion</span>
+      </h1>
+      <p class="hero-subtitle">
+        Real-time arrivals, interactive maps, and smart route discovery — all designed for Singapore's bus network.
+      </p>
+      <div class="hero-actions">
+        <a href="https://apps.apple.com/app/singapore-buses/id1455530808" class="appstore-badge" aria-label="Download on the App Store">
+          <span class="appstore-badge-icon" aria-hidden="true">&#xF8FF;</span>
+          <div class="appstore-badge-text">
+            <div class="label">Download on the</div>
+            <div class="store">App Store</div>
+          </div>
+        </a>
+        <a href="#features" class="btn-secondary">Explore Features</a>
+      </div>
+    </div>
+
+    <div class="hero-phone-wrap" aria-hidden="true">
+      <div class="phone-mockup side">
+        <img src="Screenshots/Dropped Screenshot 1.png" alt="Map view showing bus stops" loading="lazy">
+      </div>
+      <div class="phone-mockup center">
+        <img src="Screenshots/Dropped Screenshot 2 1.png" alt="Nearby bus stops list" loading="eager">
+      </div>
+      <div class="phone-mockup side">
+        <img src="Screenshots/Dropped Screenshot 3 1.png" alt="Bus arrival times" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       STATS
+       ===================================================================== -->
+  <div class="stats" aria-label="App highlights">
+    <div class="stats-inner">
+      <div class="stat-item reveal">
+        <div class="stat-value">5,000+</div>
+        <div class="stat-label">Bus Stops</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-1">
+        <div class="stat-value">15s</div>
+        <div class="stat-label">Arrival Refresh Rate</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-2">
+        <div class="stat-value">Free</div>
+        <div class="stat-label">Core Features</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       FEATURES GRID
+       ===================================================================== -->
+  <section class="section features-section" id="features" aria-labelledby="features-title">
+    <div class="section-inner">
+      <div class="features-header">
+        <p class="section-eyebrow reveal">Everything you need</p>
+        <h2 class="section-title reveal reveal-delay-1" id="features-title">
+          Built for Singapore's<br>Bus Network
+        </h2>
+        <p class="section-body centered reveal reveal-delay-2">
+          From real-time predictions to offline schedules, every feature is crafted to make your commute seamless.
+        </p>
+      </div>
+
+      <div class="features-grid">
+
+        <div class="feature-card reveal">
+          <div class="feature-icon-wrap" style="background: rgba(255,149,0,.12); color: var(--brand-orange);">
+            ⚡
+          </div>
+          <h3 class="feature-name">Real-Time Arrivals</h3>
+          <p class="feature-desc">Precise bus arrival predictions, capacity updates, and vehicle types — updated every 15 seconds.</p>
+        </div>
+
+        <div class="feature-card reveal reveal-delay-1">
+          <div class="feature-icon-wrap" style="background: rgba(0,122,255,.12); color: var(--system-blue);">
+            🗺️
+          </div>
+          <h3 class="feature-name">Interactive Map</h3>
+          <p class="feature-desc">Drag to explore and bus stops materialise before your eyes. Tap any stop to uncover arrivals and details.</p>
+        </div>
+
+        <div class="feature-card reveal reveal-delay-2">
+          <div class="feature-icon-wrap" style="background: rgba(52,199,89,.12); color: var(--system-green);">
+            🔍
+          </div>
+          <h3 class="feature-name">Swift Search</h3>
+          <p class="feature-desc">Find stops by code, name, or road — and routes by service number. Results appear as you type.</p>
+        </div>
+
+        <div class="feature-card reveal">
+          <div class="feature-icon-wrap" style="background: rgba(255,59,48,.12); color: var(--system-red);">
+            ❤️
+          </div>
+          <h3 class="feature-name">Favourites</h3>
+          <p class="feature-desc">Mark your most-used bus stops as favourites for swift, hassle-free access at a glance.</p>
+        </div>
+
+        <div class="feature-card reveal reveal-delay-1">
+          <div class="feature-icon-wrap" style="background: rgba(88,86,214,.12); color: #5856D6;">
+            🛣️
+          </div>
+          <h3 class="feature-name">Route Revelation</h3>
+          <p class="feature-desc">Discover remaining stops on any bus route. Tap "View Route Map" to visualise the entire journey with directional annotations.</p>
+        </div>
+
+        <div class="feature-card reveal reveal-delay-2">
+          <div class="feature-icon-wrap" style="background: rgba(90,200,250,.12); color: var(--system-teal, #5AC8FA);">
+            🔔
+          </div>
+          <h3 class="feature-name">Notify Me on Arrival</h3>
+          <p class="feature-desc">Activate a notification and the app alerts you as you approach your chosen bus stop. No more missing your stop.</p>
+        </div>
+
+        <div class="feature-card reveal">
+          <div class="feature-icon-wrap" style="background: rgba(50,173,230,.12); color: #32ADE6;">
+            👁️
+          </div>
+          <h3 class="feature-name">Look Around</h3>
+          <p class="feature-desc">Explore the surroundings of any bus stop with immersive street-level imagery, so you always know where you're going.</p>
+        </div>
+
+        <div class="feature-card reveal reveal-delay-1">
+          <div class="feature-icon-wrap" style="background: rgba(255,214,10,.15); color: #B8860B;">
+            📶
+          </div>
+          <h3 class="feature-name">Works Offline</h3>
+          <p class="feature-desc">No connection? No problem. Route and schedule information stays accessible even without internet.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       SHOWCASE — MAP
+       ===================================================================== -->
+  <section class="section showcase-section" aria-labelledby="showcase-map-title">
+    <div class="section-inner">
+
+      <div class="showcase-row">
+        <div class="showcase-text reveal">
+          <p class="section-eyebrow">Interactive Map</p>
+          <h2 class="showcase-title" id="showcase-map-title">
+            Explore the Network, Visually
+          </h2>
+          <p class="showcase-desc">
+            Singapore Buses integrates seamlessly with Apple Maps, giving you a rich, 3D view of bus stops across the city. Drag, zoom, and tap to navigate the entire network with confidence.
+          </p>
+          <span class="showcase-chip" style="background: rgba(0,122,255,.1); color: var(--system-blue);">Apple Maps</span>
+          <span class="showcase-chip" style="background: rgba(255,149,0,.1); color: var(--brand-orange);">3D View</span>
+          <span class="showcase-chip" style="background: rgba(52,199,89,.1); color: var(--system-green);">Live Stops</span>
+        </div>
+        <div class="showcase-phone reveal reveal-delay-1">
+          <img src="Screenshots/Dropped Screenshot 1.png" alt="Interactive map showing bus stops around Battery Road, Singapore" loading="lazy">
+        </div>
+      </div>
+
+      <div class="divider-line" style="margin: var(--sp-24) 0;" aria-hidden="true"></div>
+
+      <div class="showcase-row reverse">
+        <div class="showcase-text reveal">
+          <p class="section-eyebrow">Arrival Board</p>
+          <h2 class="showcase-title">
+            Know Before You Go
+          </h2>
+          <p class="showcase-desc">
+            The bus stop detail view shows upcoming arrivals in real time — service number, minutes away, capacity, and vehicle type. Updated every 15 seconds so you're always accurate.
+          </p>
+          <span class="showcase-chip" style="background: rgba(52,199,89,.1); color: var(--system-green);">15s Refresh</span>
+          <span class="showcase-chip" style="background: rgba(255,149,0,.1); color: var(--brand-orange);">Capacity Info</span>
+        </div>
+        <div class="showcase-phone reveal reveal-delay-1">
+          <img src="Screenshots/Dropped Screenshot 3 1.png" alt="Fullerton Sq bus stop showing upcoming arrivals for multiple services" loading="lazy">
+        </div>
+      </div>
+
+      <div class="divider-line" style="margin: var(--sp-24) 0;" aria-hidden="true"></div>
+
+      <div class="showcase-row">
+        <div class="showcase-text reveal">
+          <p class="section-eyebrow">Route Map</p>
+          <h2 class="showcase-title">
+            See the Whole Journey
+          </h2>
+          <p class="showcase-desc">
+            Tap "View Route Map" from any bus stop to visualise the complete route on a live map. Direction arrows make it immediately clear which way the bus is headed.
+          </p>
+          <span class="showcase-chip" style="background: rgba(88,86,214,.1); color: #5856D6;">Full Route</span>
+          <span class="showcase-chip" style="background: rgba(0,122,255,.1); color: var(--system-blue);">Direction Arrows</span>
+        </div>
+        <div class="showcase-phone reveal reveal-delay-1">
+          <img src="Screenshots/Dropped Screenshot 4 1.png" alt="Service 130 route map showing the full route path" loading="lazy">
+        </div>
+      </div>
+
+      <div class="divider-line" style="margin: var(--sp-24) 0;" aria-hidden="true"></div>
+
+      <div class="showcase-row reverse">
+        <div class="showcase-text reveal">
+          <p class="section-eyebrow">Look Around</p>
+          <h2 class="showcase-title">
+            Explore Your Surroundings
+          </h2>
+          <p class="showcase-desc">
+            Not sure what a stop looks like? Use Look Around to get an immersive street-level view of the exact location, so you'll always recognise it when you arrive.
+          </p>
+          <span class="showcase-chip" style="background: rgba(50,173,230,.1); color: #32ADE6;">Street View</span>
+          <span class="showcase-chip" style="background: rgba(255,149,0,.1); color: var(--brand-orange);">Apple Maps</span>
+        </div>
+        <div class="showcase-phone reveal reveal-delay-1">
+          <img src="Screenshots/Dropped Screenshot 7 1.png" alt="Look Around view of Nicoll Highway bus stop" loading="lazy">
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       SCREENSHOTS CAROUSEL
+       ===================================================================== -->
+  <section class="section screenshots-section" aria-labelledby="screenshots-title">
+    <div class="screenshots-header section-inner">
+      <p class="section-eyebrow reveal">Gallery</p>
+      <h2 class="section-title reveal reveal-delay-1" id="screenshots-title">See it in Action</h2>
+    </div>
+    <div class="screenshots-scroll" role="list" aria-label="App screenshots">
+      <div class="screenshot-item" role="listitem">
+        <img src="Screenshots/Dropped Screenshot 1.png" alt="Map view" loading="lazy">
+      </div>
+      <div class="screenshot-item" role="listitem">
+        <img src="Screenshots/Dropped Screenshot 2 1.png" alt="Nearby stops list" loading="lazy">
+      </div>
+      <div class="screenshot-item" role="listitem">
+        <img src="Screenshots/Dropped Screenshot 3 1.png" alt="Bus arrivals detail" loading="lazy">
+      </div>
+      <div class="screenshot-item" role="listitem">
+        <img src="Screenshots/Dropped Screenshot 4 1.png" alt="Route map day" loading="lazy">
+      </div>
+      <div class="screenshot-item" role="listitem">
+        <img src="Screenshots/Dropped Screenshot 5 1.png" alt="Route map night" loading="lazy">
+      </div>
+      <div class="screenshot-item" role="listitem">
+        <img src="Screenshots/Dropped Screenshot 6 1.png" alt="Live Activity" loading="lazy">
+      </div>
+      <div class="screenshot-item" role="listitem">
+        <img src="Screenshots/Dropped Screenshot 7 1.png" alt="Look Around" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       SINGAPORE BUSES+
+       ===================================================================== -->
+  <section class="section plus-section" id="plus" aria-labelledby="plus-title">
+    <div class="section-inner">
+      <div class="plus-card">
+        <div class="plus-card-inner">
+          <div class="plus-badge">⭐ Premium</div>
+
+          <!-- Live Activity preview pill -->
+          <div class="live-activity-preview" aria-label="Live Activity example" style="margin: 0 auto var(--sp-8);">
+            <span class="la-icon">🚌</span>
+            <div class="la-info">
+              <div class="la-label">Service 10 · Opp City Hall</div>
+              <div class="la-arrival">
+                <span class="la-time">3m</span>
+                <span class="la-unit">&nbsp;·&nbsp;</span>
+                <span class="la-time">18m</span>
+                <span class="la-unit">&nbsp;·&nbsp;</span>
+                <span class="la-time">33m</span>
+              </div>
+            </div>
+          </div>
+
+          <h2 class="plus-title" id="plus-title">
+            Introducing<br>
+            <span class="highlight">Singapore Buses+</span>
+          </h2>
+          <p class="plus-desc">
+            Take your commute to the next level with exclusive features — including Live Activities right on your Lock Screen.
+          </p>
+
+          <div class="plus-features">
+            <div class="plus-feature-item">
+              <div class="plus-feature-icon">🔒</div>
+              <div class="plus-feature-name">Live Activities</div>
+              <div class="plus-feature-desc">Track arrivals from your Lock Screen without ever opening the app.</div>
+            </div>
+            <div class="plus-feature-item">
+              <div class="plus-feature-icon">🏝️</div>
+              <div class="plus-feature-name">Dynamic Island</div>
+              <div class="plus-feature-desc">Stay informed with glanceable arrival info surfaced in Dynamic Island.</div>
+            </div>
+            <div class="plus-feature-item">
+              <div class="plus-feature-icon">⚡</div>
+              <div class="plus-feature-name">Always Up to Date</div>
+              <div class="plus-feature-desc">Live Activities update in real time so you never miss a bus.</div>
+            </div>
+          </div>
+
+          <a href="https://apps.apple.com/app/singapore-buses/id1455530808" class="btn-primary" style="background: linear-gradient(135deg, var(--brand-orange), var(--brand-yellow)); color: #000; font-weight: var(--font-bold);" aria-label="Get Singapore Buses on the App Store">
+            Get Singapore Buses
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       FOOTER
+       ===================================================================== -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-brand-row">
+            <div class="footer-logo">
+              <img src="Icon/400x400bb-75.webp" alt="Singapore Buses app icon">
+            </div>
+            <span class="footer-brand-name">Singapore Buses</span>
+          </div>
+          <p class="footer-tagline">
+            Your ultimate companion for navigating Singapore's bus network. Real-time, reliable, and beautifully designed.
+          </p>
+          <a href="https://apps.apple.com/app/singapore-buses/id1455530808" class="appstore-badge" style="font-size: 14px;" aria-label="Download on the App Store">
+            <span class="appstore-badge-icon" aria-hidden="true" style="font-size: 22px;">&#xF8FF;</span>
+            <div class="appstore-badge-text">
+              <div class="label">Download on the</div>
+              <div class="store" style="font-size: 15px;">App Store</div>
+            </div>
+          </a>
+        </div>
+
+        <div>
+          <p class="footer-col-title">Features</p>
+          <ul class="footer-links">
+            <li><a href="#features">Real-Time Arrivals</a></li>
+            <li><a href="#features">Interactive Map</a></li>
+            <li><a href="#features">Route Maps</a></li>
+            <li><a href="#features">Look Around</a></li>
+            <li><a href="#plus">Singapore Buses+</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-legal">
+          © 2025 Stuart Breckenridge. Data as precise as provided by LTA DataMall.
+        </p>
+        <nav class="footer-legal-links" aria-label="Legal links">
+          <a href="terms.html">Terms</a>
+          <a href="privacy.html">Privacy</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =====================================================================
+       SCROLL REVEAL SCRIPT
+       ===================================================================== -->
+  <script>
+    (function () {
+      // Scroll reveal
+      const reveals = document.querySelectorAll('.reveal');
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              io.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+      );
+      reveals.forEach((el) => io.observe(el));
+
+      // Nav background opacity on scroll
+      const nav = document.querySelector('.nav');
+      window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY > 20;
+        nav.style.boxShadow = scrolled ? '0 1px 12px rgba(0,0,0,0.08)' : 'none';
+      }, { passive: true });
+
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((a) => {
+        a.addEventListener('click', (e) => {
+          const target = document.querySelector(a.getAttribute('href'));
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
