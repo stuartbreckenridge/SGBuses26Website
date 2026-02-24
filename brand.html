@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brand Kit — Singapore Buses</title>
+  <meta name="description" content="Official Singapore Buses brand assets — app icon, colour palette, and app screenshots for press and media use.">
+  <style>
+    :root {
+      --font-system: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+
+      --text-caption2: 11px;
+      --text-caption1: 12px;
+      --text-footnote: 13px;
+      --text-subhead: 15px;
+      --text-callout: 16px;
+      --text-body: 17px;
+      --text-headline: 17px;
+      --text-title3: 20px;
+      --text-title2: 22px;
+      --text-title1: 28px;
+      --text-large-title: 34px;
+
+      --font-regular: 400;
+      --font-medium: 500;
+      --font-semibold: 600;
+      --font-bold: 700;
+      --font-heavy: 800;
+
+      --lh-snug: 1.2;
+      --lh-normal: 1.4;
+      --lh-relaxed: 1.6;
+
+      --brand-orange: #FF9500;
+      --brand-yellow: #FFD60A;
+      --brand-dark: #2C2C2E;
+      --system-blue: #007AFF;
+      --system-green: #34C759;
+
+      --label-primary: #000000;
+      --label-secondary: rgba(60, 60, 67, 0.6);
+      --label-tertiary: rgba(60, 60, 67, 0.3);
+
+      --bg-primary: #FFFFFF;
+      --bg-secondary: #F2F2F7;
+      --bg-tertiary: #FFFFFF;
+
+      --separator: rgba(60, 60, 67, 0.2);
+
+      --sp-1: 4px;  --sp-2: 8px;   --sp-3: 12px;
+      --sp-4: 16px; --sp-5: 20px;  --sp-6: 24px;
+      --sp-8: 32px; --sp-10: 40px; --sp-12: 48px;
+      --sp-16: 64px; --sp-20: 80px;
+
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 20px;
+      --radius-2xl: 24px;
+      --radius-3xl: 32px;
+      --radius-full: 9999px;
+
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.08);
+      --shadow-md: 0 4px 12px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.06);
+      --shadow-lg: 0 12px 28px rgba(0,0,0,.10), 0 4px 8px rgba(0,0,0,.08);
+
+      --ease-out: cubic-bezier(0, 0, 0.58, 1);
+      --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      --dur-fast: 150ms;
+      --dur-normal: 250ms;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --system-blue: #0A84FF;
+        --system-green: #30D158;
+        --brand-orange: #FF9F0A;
+        --label-primary: #FFFFFF;
+        --label-secondary: rgba(235, 235, 245, 0.6);
+        --label-tertiary: rgba(235, 235, 245, 0.3);
+        --bg-primary: #000000;
+        --bg-secondary: #1C1C1E;
+        --bg-tertiary: #2C2C2E;
+        --separator: rgba(84, 84, 88, 0.5);
+      }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      font-family: var(--font-system);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-size: var(--text-body);
+      color: var(--label-primary);
+      background: var(--bg-primary);
+    }
+
+    img { display: block; max-width: 100%; }
+    a { color: var(--system-blue); text-decoration: none; }
+    a:hover { text-decoration: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    ::selection { background: rgba(255,149,0,.25); }
+
+    /* ── Nav ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--sp-6);
+      height: 64px;
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 0.5px solid var(--separator);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .nav { background: rgba(0, 0, 0, 0.82); }
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-3);
+      color: var(--label-primary);
+    }
+
+    .nav-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .nav-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .nav-title {
+      font-size: var(--text-headline);
+      font-weight: var(--font-semibold);
+    }
+
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-2);
+      height: 36px;
+      padding: 0 var(--sp-4);
+      font-size: var(--text-subhead);
+      font-weight: var(--font-medium);
+      color: var(--system-blue);
+      background: rgba(0, 122, 255, 0.1);
+      border-radius: var(--radius-full);
+      transition: background var(--dur-fast) var(--ease-out);
+    }
+
+    .nav-back:hover { background: rgba(0, 122, 255, 0.16); }
+
+    @media (prefers-color-scheme: dark) {
+      .nav-back { background: rgba(10, 132, 255, 0.15); }
+      .nav-back:hover { background: rgba(10, 132, 255, 0.22); }
+    }
+
+    /* ── Page header ── */
+    .page-header {
+      background: var(--bg-secondary);
+      padding: var(--sp-16) var(--sp-6) var(--sp-12);
+      border-bottom: 0.5px solid var(--separator);
+    }
+
+    .page-header-inner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .page-eyebrow {
+      font-size: var(--text-footnote);
+      font-weight: var(--font-semibold);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--brand-orange);
+      margin-bottom: var(--sp-3);
+    }
+
+    .page-title {
+      font-size: clamp(var(--text-title1), 5vw, var(--text-large-title));
+      font-weight: var(--font-heavy);
+      letter-spacing: -0.025em;
+      line-height: var(--lh-snug);
+      margin-bottom: var(--sp-4);
+    }
+
+    .page-desc {
+      font-size: var(--text-title3);
+      color: var(--label-secondary);
+      line-height: var(--lh-relaxed);
+      max-width: 540px;
+    }
+
+    /* ── Sections ── */
+    .bk-section {
+      padding: var(--sp-16) var(--sp-6);
+      border-bottom: 0.5px solid var(--separator);
+    }
+
+    .bk-section-alt {
+      background: var(--bg-secondary);
+    }
+
+    .bk-inner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .bk-section-title {
+      font-size: var(--text-title2);
+      font-weight: var(--font-bold);
+      letter-spacing: -0.02em;
+      margin-bottom: var(--sp-2);
+    }
+
+    .bk-section-desc {
+      font-size: var(--text-callout);
+      color: var(--label-secondary);
+      line-height: var(--lh-relaxed);
+      margin-bottom: var(--sp-8);
+    }
+
+    /* ── App Icon ── */
+    .icon-card {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-8);
+      background: var(--bg-tertiary);
+      border: 0.5px solid var(--separator);
+      border-radius: var(--radius-2xl);
+      padding: var(--sp-8);
+    }
+
+    .icon-preview {
+      flex-shrink: 0;
+      width: 160px;
+      height: 160px;
+      border-radius: 36px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .icon-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .icon-meta {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-2);
+    }
+
+    .asset-name {
+      font-size: var(--text-title3);
+      font-weight: var(--font-bold);
+      color: var(--label-primary);
+    }
+
+    .asset-detail {
+      font-size: var(--text-subhead);
+      color: var(--label-secondary);
+    }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-2);
+      height: 40px;
+      padding: 0 var(--sp-5);
+      margin-top: var(--sp-3);
+      font-size: var(--text-subhead);
+      font-weight: var(--font-semibold);
+      color: #fff;
+      background: var(--brand-orange);
+      border-radius: var(--radius-full);
+      transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+      text-decoration: none;
+      width: fit-content;
+    }
+
+    .download-btn:hover { opacity: 0.88; }
+    .download-btn:active { transform: scale(0.97); }
+
+    .download-btn-ghost {
+      color: var(--system-blue);
+      background: rgba(0, 122, 255, 0.1);
+    }
+
+    .download-btn-ghost:hover { opacity: 1; background: rgba(0, 122, 255, 0.16); }
+
+    @media (prefers-color-scheme: dark) {
+      .download-btn-ghost { background: rgba(10, 132, 255, 0.15); }
+      .download-btn-ghost:hover { background: rgba(10, 132, 255, 0.22); }
+    }
+
+    @media (max-width: 560px) {
+      .icon-card { flex-direction: column; align-items: flex-start; }
+      .icon-preview { width: 120px; height: 120px; border-radius: 28px; }
+    }
+
+    /* ── Colour Palette ── */
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: var(--sp-4);
+    }
+
+    .palette-swatch {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--bg-tertiary);
+      border: 0.5px solid var(--separator);
+      cursor: pointer;
+      transition: transform var(--dur-normal) var(--ease-spring), box-shadow var(--dur-normal) var(--ease-out);
+      position: relative;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .palette-swatch:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .palette-color {
+      height: 88px;
+    }
+
+    .palette-info {
+      padding: var(--sp-3) var(--sp-3) var(--sp-3);
+    }
+
+    .palette-name {
+      font-size: var(--text-footnote);
+      font-weight: var(--font-semibold);
+      color: var(--label-primary);
+      margin-bottom: 2px;
+    }
+
+    .palette-hex {
+      font-size: var(--text-caption1);
+      color: var(--label-secondary);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.02em;
+      font-family: 'SF Mono', 'Menlo', 'Monaco', monospace;
+    }
+
+    .palette-copied {
+      position: absolute;
+      top: var(--sp-2);
+      right: var(--sp-2);
+      background: rgba(0,0,0,.7);
+      color: #fff;
+      font-size: var(--text-caption2);
+      font-weight: var(--font-semibold);
+      padding: 3px 8px;
+      border-radius: var(--radius-full);
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity var(--dur-fast), transform var(--dur-fast) var(--ease-spring);
+      pointer-events: none;
+    }
+
+    .palette-swatch.did-copy .palette-copied {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* ── Screenshots ── */
+    .screenshots-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: var(--sp-5);
+    }
+
+    .screenshot-card {
+      background: var(--bg-tertiary);
+      border: 0.5px solid var(--separator);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow var(--dur-normal) var(--ease-out), transform var(--dur-normal) var(--ease-out);
+    }
+
+    .screenshot-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+    }
+
+    .screenshot-thumb {
+      background: var(--bg-secondary);
+      aspect-ratio: 9 / 19.5;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .screenshot-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+    }
+
+    .screenshot-info {
+      padding: var(--sp-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-2);
+      flex: 1;
+    }
+
+    .screenshot-name {
+      font-size: var(--text-subhead);
+      font-weight: var(--font-semibold);
+      color: var(--label-primary);
+    }
+
+    .screenshot-meta {
+      font-size: var(--text-caption1);
+      color: var(--label-secondary);
+    }
+
+    .screenshot-info .download-btn {
+      margin-top: auto;
+      padding-top: var(--sp-2);
+    }
+
+    /* ── Usage Guidelines ── */
+    .guidelines-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: var(--sp-5);
+    }
+
+    .guideline-card {
+      background: var(--bg-tertiary);
+      border: 0.5px solid var(--separator);
+      border-radius: var(--radius-xl);
+      padding: var(--sp-6);
+    }
+
+    .guideline-icon {
+      font-size: 28px;
+      margin-bottom: var(--sp-3);
+    }
+
+    .guideline-title {
+      font-size: var(--text-headline);
+      font-weight: var(--font-semibold);
+      margin-bottom: var(--sp-2);
+    }
+
+    .guideline-desc {
+      font-size: var(--text-subhead);
+      color: var(--label-secondary);
+      line-height: var(--lh-relaxed);
+    }
+
+    .guideline-card.do { border-top: 3px solid var(--system-green); }
+    .guideline-card.dont { border-top: 3px solid #FF3B30; }
+
+    @media (prefers-color-scheme: dark) {
+      .guideline-card.dont { border-top-color: #FF453A; }
+    }
+
+    /* ── Contact ── */
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-4);
+      flex-wrap: wrap;
+    }
+
+    .contact-desc {
+      font-size: var(--text-callout);
+      color: var(--label-secondary);
+      line-height: var(--lh-relaxed);
+    }
+
+    /* ── Footer ── */
+    .footer {
+      background: var(--bg-secondary);
+      border-top: 0.5px solid var(--separator);
+      padding: var(--sp-8) var(--sp-6);
+    }
+
+    .footer-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--sp-4);
+    }
+
+    .footer-copy {
+      font-size: var(--text-footnote);
+      color: var(--label-secondary);
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-5);
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: var(--text-footnote);
+      color: var(--label-secondary);
+      transition: color var(--dur-fast);
+    }
+
+    .footer-links a:hover { color: var(--brand-orange); }
+  </style>
+</head>
+<body>
+
+  <!-- ── Nav ── -->
+  <nav class="nav" aria-label="Site navigation">
+    <a class="nav-brand" href="index.html" aria-label="Singapore Buses home">
+      <div class="nav-icon">
+        <img src="Icon/400x400bb-75.webp" alt="Singapore Buses app icon">
+      </div>
+      <span class="nav-title">Singapore Buses</span>
+    </a>
+    <a class="nav-back" href="index.html">
+      ← Home
+    </a>
+  </nav>
+
+  <!-- ── Page Header ── -->
+  <header class="page-header">
+    <div class="page-header-inner">
+      <p class="page-eyebrow">Resources</p>
+      <h1 class="page-title">Brand Kit</h1>
+      <p class="page-desc">Official assets for press, media, and partners. Download the app icon, colour swatches, and full-resolution screenshots.</p>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ── App Icon ── -->
+    <section class="bk-section" aria-labelledby="icon-title">
+      <div class="bk-inner">
+        <h2 class="bk-section-title" id="icon-title">App Icon</h2>
+        <p class="bk-section-desc">Use on a white or light background wherever possible. Do not crop, recolour, or add effects.</p>
+        <div class="icon-card">
+          <div class="icon-preview">
+            <img src="Icon/400x400bb-75.webp" alt="Singapore Buses app icon — orange gradient background with a bus silhouette">
+          </div>
+          <div class="icon-meta">
+            <p class="asset-name">Singapore Buses</p>
+            <p class="asset-detail">400 × 400 px · WebP</p>
+            <a class="download-btn"
+               href="Icon/400x400bb-75.webp"
+               download="SingaporeBuses-Icon.webp"
+               aria-label="Download app icon as WebP">
+              ↓&nbsp; Download Icon
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Colour Palette ── -->
+    <section class="bk-section bk-section-alt" aria-labelledby="palette-title">
+      <div class="bk-inner">
+        <h2 class="bk-section-title" id="palette-title">Colour Palette</h2>
+        <p class="bk-section-desc">Tap any swatch to copy its hex value to the clipboard.</p>
+
+        <div class="palette-grid" role="list" aria-label="Brand colours">
+
+          <div class="palette-swatch" role="listitem" data-hex="#FF9500" aria-label="Brand Orange — #FF9500, tap to copy">
+            <div class="palette-color" style="background:#FF9500;"></div>
+            <div class="palette-info">
+              <p class="palette-name">Brand Orange</p>
+              <p class="palette-hex">#FF9500</p>
+            </div>
+            <span class="palette-copied" aria-hidden="true">Copied!</span>
+          </div>
+
+          <div class="palette-swatch" role="listitem" data-hex="#FFD60A" aria-label="Brand Yellow — #FFD60A, tap to copy">
+            <div class="palette-color" style="background:#FFD60A;"></div>
+            <div class="palette-info">
+              <p class="palette-name">Brand Yellow</p>
+              <p class="palette-hex">#FFD60A</p>
+            </div>
+            <span class="palette-copied" aria-hidden="true">Copied!</span>
+          </div>
+
+          <div class="palette-swatch" role="listitem" data-hex="#2C2C2E" aria-label="Brand Dark — #2C2C2E, tap to copy">
+            <div class="palette-color" style="background:#2C2C2E; border-bottom: 0.5px solid rgba(255,255,255,.08);"></div>
+            <div class="palette-info">
+              <p class="palette-name">Brand Dark</p>
+              <p class="palette-hex">#2C2C2E</p>
+            </div>
+            <span class="palette-copied" aria-hidden="true">Copied!</span>
+          </div>
+
+          <div class="palette-swatch" role="listitem" data-hex="#007AFF" aria-label="System Blue — #007AFF, tap to copy">
+            <div class="palette-color" style="background:#007AFF;"></div>
+            <div class="palette-info">
+              <p class="palette-name">System Blue</p>
+              <p class="palette-hex">#007AFF</p>
+            </div>
+            <span class="palette-copied" aria-hidden="true">Copied!</span>
+          </div>
+
+          <div class="palette-swatch" role="listitem" data-hex="#34C759" aria-label="System Green — #34C759, tap to copy">
+            <div class="palette-color" style="background:#34C759;"></div>
+            <div class="palette-info">
+              <p class="palette-name">System Green</p>
+              <p class="palette-hex">#34C759</p>
+            </div>
+            <span class="palette-copied" aria-hidden="true">Copied!</span>
+          </div>
+
+          <div class="palette-swatch" role="listitem" data-hex="#FFFFFF" aria-label="White — #FFFFFF, tap to copy">
+            <div class="palette-color" style="background:#FFFFFF; border-bottom: 0.5px solid var(--separator);"></div>
+            <div class="palette-info">
+              <p class="palette-name">White</p>
+              <p class="palette-hex">#FFFFFF</p>
+            </div>
+            <span class="palette-copied" aria-hidden="true">Copied!</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── App Screenshots ── -->
+    <section class="bk-section" aria-labelledby="screenshots-title">
+      <div class="bk-inner">
+        <h2 class="bk-section-title" id="screenshots-title">App Screenshots</h2>
+        <p class="bk-section-desc">Full-resolution PNG screenshots taken on iPhone. Free to use in editorial and media coverage of Singapore Buses.</p>
+
+        <div class="screenshots-grid">
+
+          <div class="screenshot-card">
+            <div class="screenshot-thumb">
+              <img src="Screenshots/Dropped Screenshot 1.png" alt="Interactive map view showing bus stops across Singapore" loading="lazy">
+            </div>
+            <div class="screenshot-info">
+              <p class="screenshot-name">Interactive Map</p>
+              <p class="screenshot-meta">PNG · 1.7 MB</p>
+              <a class="download-btn download-btn-ghost"
+                 href="Screenshots/Dropped Screenshot 1.png"
+                 download="SingaporeBuses-Screenshot-Map.png"
+                 aria-label="Download Interactive Map screenshot">
+                ↓&nbsp; Download
+              </a>
+            </div>
+          </div>
+
+          <div class="screenshot-card">
+            <div class="screenshot-thumb">
+              <img src="Screenshots/Dropped Screenshot 2 1.png" alt="Nearby bus stops list with real-time arrival times" loading="lazy">
+            </div>
+            <div class="screenshot-info">
+              <p class="screenshot-name">Nearby Stops</p>
+              <p class="screenshot-meta">PNG · 804 KB</p>
+              <a class="download-btn download-btn-ghost"
+                 href="Screenshots/Dropped Screenshot 2 1.png"
+                 download="SingaporeBuses-Screenshot-NearbyStops.png"
+                 aria-label="Download Nearby Stops screenshot">
+                ↓&nbsp; Download
+              </a>
+            </div>
+          </div>
+
+          <div class="screenshot-card">
+            <div class="screenshot-thumb">
+              <img src="Screenshots/Dropped Screenshot 3 1.png" alt="Bus arrivals detail with service numbers and minutes" loading="lazy">
+            </div>
+            <div class="screenshot-info">
+              <p class="screenshot-name">Bus Arrivals</p>
+              <p class="screenshot-meta">PNG · 1.2 MB</p>
+              <a class="download-btn download-btn-ghost"
+                 href="Screenshots/Dropped Screenshot 3 1.png"
+                 download="SingaporeBuses-Screenshot-Arrivals.png"
+                 aria-label="Download Bus Arrivals screenshot">
+                ↓&nbsp; Download
+              </a>
+            </div>
+          </div>
+
+          <div class="screenshot-card">
+            <div class="screenshot-thumb">
+              <img src="Screenshots/Dropped Screenshot 4 1.png" alt="Full route map showing a bus service in daylight" loading="lazy">
+            </div>
+            <div class="screenshot-info">
+              <p class="screenshot-name">Route Map</p>
+              <p class="screenshot-meta">PNG · 1.7 MB</p>
+              <a class="download-btn download-btn-ghost"
+                 href="Screenshots/Dropped Screenshot 4 1.png"
+                 download="SingaporeBuses-Screenshot-RouteMap.png"
+                 aria-label="Download Route Map screenshot">
+                ↓&nbsp; Download
+              </a>
+            </div>
+          </div>
+
+          <div class="screenshot-card">
+            <div class="screenshot-thumb">
+              <img src="Screenshots/Dropped Screenshot 5 1.png" alt="Full route map shown in night / dark mode" loading="lazy">
+            </div>
+            <div class="screenshot-info">
+              <p class="screenshot-name">Route Map (Night)</p>
+              <p class="screenshot-meta">PNG · 1.6 MB</p>
+              <a class="download-btn download-btn-ghost"
+                 href="Screenshots/Dropped Screenshot 5 1.png"
+                 download="SingaporeBuses-Screenshot-RouteMapNight.png"
+                 aria-label="Download Route Map Night screenshot">
+                ↓&nbsp; Download
+              </a>
+            </div>
+          </div>
+
+          <div class="screenshot-card">
+            <div class="screenshot-thumb">
+              <img src="Screenshots/Dropped Screenshot 6 1.png" alt="Live Activity on the Lock Screen showing bus arrival times" loading="lazy">
+            </div>
+            <div class="screenshot-info">
+              <p class="screenshot-name">Live Activity</p>
+              <p class="screenshot-meta">PNG · 1.2 MB</p>
+              <a class="download-btn download-btn-ghost"
+                 href="Screenshots/Dropped Screenshot 6 1.png"
+                 download="SingaporeBuses-Screenshot-LiveActivity.png"
+                 aria-label="Download Live Activity screenshot">
+                ↓&nbsp; Download
+              </a>
+            </div>
+          </div>
+
+          <div class="screenshot-card">
+            <div class="screenshot-thumb">
+              <img src="Screenshots/Dropped Screenshot 7 1.png" alt="Apple Look Around street-level view of a bus stop" loading="lazy">
+            </div>
+            <div class="screenshot-info">
+              <p class="screenshot-name">Look Around</p>
+              <p class="screenshot-meta">PNG · 2.7 MB</p>
+              <a class="download-btn download-btn-ghost"
+                 href="Screenshots/Dropped Screenshot 7 1.png"
+                 download="SingaporeBuses-Screenshot-LookAround.png"
+                 aria-label="Download Look Around screenshot">
+                ↓&nbsp; Download
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Usage Guidelines ── -->
+    <section class="bk-section bk-section-alt" aria-labelledby="guidelines-title">
+      <div class="bk-inner">
+        <h2 class="bk-section-title" id="guidelines-title">Usage Guidelines</h2>
+        <p class="bk-section-desc">Please follow these guidelines when using Singapore Buses brand assets.</p>
+
+        <div class="guidelines-grid">
+          <div class="guideline-card do">
+            <div class="guideline-icon">✅</div>
+            <p class="guideline-title">Use as provided</p>
+            <p class="guideline-desc">Use the icon and screenshots exactly as supplied without cropping, recolouring, or distorting them.</p>
+          </div>
+
+          <div class="guideline-card do">
+            <div class="guideline-icon">✅</div>
+            <p class="guideline-title">Credit the app</p>
+            <p class="guideline-desc">When publishing screenshots or the icon, credit "Singapore Buses" as the source where appropriate.</p>
+          </div>
+
+          <div class="guideline-card dont">
+            <div class="guideline-icon">🚫</div>
+            <p class="guideline-title">Don't imply endorsement</p>
+            <p class="guideline-desc">Do not use assets in a way that implies Singapore Buses or its developer endorses your product or service.</p>
+          </div>
+
+          <div class="guideline-card dont">
+            <div class="guideline-icon">🚫</div>
+            <p class="guideline-title">Don't alter brand colours</p>
+            <p class="guideline-desc">Do not change the colour of the app icon or use brand colours in a misleading context.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Contact ── -->
+    <section class="bk-section" aria-labelledby="contact-title">
+      <div class="bk-inner">
+        <h2 class="bk-section-title" id="contact-title">Media &amp; Press</h2>
+        <p class="bk-section-desc">Questions about coverage, partnerships, or assets not listed here?</p>
+        <div class="contact-row">
+          <a class="download-btn" href="mailto:support@singaporebuses.app" aria-label="Email the Singapore Buses team">
+            ✉&nbsp; Get in Touch
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer-inner">
+      <p class="footer-copy">© 2025 Stuart Breckenridge</p>
+      <ul class="footer-links" aria-label="Site links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="terms.html">Terms</a></li>
+        <li><a href="privacy.html">Privacy</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script>
+    // Click-to-copy colour hex values
+    document.querySelectorAll('.palette-swatch').forEach(function (swatch) {
+      swatch.addEventListener('click', function () {
+        var hex = this.dataset.hex;
+        if (!hex) return;
+        navigator.clipboard.writeText(hex).then(function () {
+          swatch.classList.add('did-copy');
+          setTimeout(function () { swatch.classList.remove('did-copy'); }, 1600);
+        }).catch(function () {
+          // Fallback for older browsers
+          var ta = document.createElement('textarea');
+          ta.value = hex;
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+          swatch.classList.add('did-copy');
+          setTimeout(function () { swatch.classList.remove('did-copy'); }, 1600);
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -209,6 +209,25 @@
       color: var(--label-primary);
     }
 
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-3);
+    }
+
+    .nav-link {
+      font-size: var(--text-subhead);
+      font-weight: var(--font-medium);
+      color: var(--label-secondary);
+      transition: color var(--dur-fast) var(--ease-out);
+    }
+
+    .nav-link:hover { color: var(--brand-orange); }
+
+    @media (max-width: 480px) {
+      .nav-link { display: none; }
+    }
+
     .nav-cta {
       display: inline-flex;
       align-items: center;
@@ -1076,9 +1095,12 @@
       </div>
       <span class="nav-title">Singapore Buses</span>
     </div>
-    <a href="https://singaporebuses.app.link/download" class="nav-cta" aria-label="Download on the App Store">
-      Download Free
-    </a>
+    <div class="nav-right">
+      <a href="brand.html" class="nav-link">Brand Kit</a>
+      <a href="https://singaporebuses.app.link/download" class="nav-cta" aria-label="Download on the App Store">
+        Download Free
+      </a>
+    </div>
   </nav>
 
   <!-- =====================================================================
@@ -1477,6 +1499,7 @@
           © 2025 Stuart Breckenridge. Data as precise as provided by LTA DataMall.
         </p>
         <nav class="footer-legal-links" aria-label="Legal links">
+          <a href="brand.html">Brand Kit</a>
           <a href="terms.html">Terms</a>
           <a href="privacy.html">Privacy</a>
         </nav>
