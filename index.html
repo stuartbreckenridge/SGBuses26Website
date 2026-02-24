@@ -741,6 +741,102 @@
     }
 
     /* =====================================================================
+       THEMING SHOWCASE
+       ===================================================================== */
+    .theming-showcase {
+      margin: 0 auto var(--sp-10);
+      max-width: 440px;
+    }
+
+    .theming-label {
+      font-size: var(--text-caption1);
+      font-weight: var(--font-semibold);
+      opacity: 0.55;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: var(--sp-3);
+    }
+
+    .theming-map {
+      --annotation-color: #FF9500;
+      background-color: #C8D8BF;
+      background-image:
+        linear-gradient(transparent 35%, rgba(255,255,255,0.82) 35%, rgba(255,255,255,0.82) 39%, transparent 39%),
+        linear-gradient(transparent 63%, rgba(255,255,255,0.82) 63%, rgba(255,255,255,0.82) 67%, transparent 67%),
+        linear-gradient(90deg, transparent 27%, rgba(255,255,255,0.82) 27%, rgba(255,255,255,0.82) 31%, transparent 31%),
+        linear-gradient(90deg, transparent 60%, rgba(255,255,255,0.82) 60%, rgba(255,255,255,0.82) 64%, transparent 64%);
+      border-radius: var(--radius-xl);
+      height: 192px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.3);
+    }
+
+    .map-marker {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      transform: translate(-50%, -50%);
+    }
+
+    .map-pin {
+      width: 26px;
+      height: 26px;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      background: var(--annotation-color);
+      border: 2.5px solid rgba(255,255,255,.9);
+      box-shadow: 0 3px 10px rgba(0,0,0,.28);
+      transition: background var(--dur-slow) var(--ease-out);
+      flex-shrink: 0;
+    }
+
+    .map-pin-label {
+      background: rgba(255,255,255,.95);
+      color: #1C1C1E;
+      font-size: 9px;
+      font-weight: var(--font-semibold);
+      padding: 2px 6px;
+      border-radius: 4px;
+      white-space: nowrap;
+      box-shadow: 0 1px 3px rgba(0,0,0,.14);
+      margin-top: 10px;
+    }
+
+    .theming-swatches {
+      display: flex;
+      gap: var(--sp-3);
+      justify-content: center;
+      margin-top: var(--sp-4);
+      flex-wrap: wrap;
+    }
+
+    .swatch {
+      width: 30px;
+      height: 30px;
+      border-radius: var(--radius-full);
+      border: 3px solid transparent;
+      cursor: pointer;
+      transition: transform var(--dur-normal) var(--ease-spring), border-color var(--dur-fast);
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+      padding: 0;
+    }
+
+    .swatch:hover {
+      transform: scale(1.15);
+    }
+
+    .swatch.swatch-active {
+      border-color: rgba(255,255,255,.9);
+      transform: scale(1.25);
+    }
+
+    /* =====================================================================
        SCREENSHOTS CAROUSEL
        ===================================================================== */
     .screenshots-section {
@@ -1273,7 +1369,7 @@
             <span class="highlight">Singapore Buses+</span>
           </h2>
           <p class="plus-desc">
-            Take your commute to the next level with exclusive features — including Live Activities right on your Lock Screen.
+            Take your commute to the next level with exclusive features — including Live Activities on your Lock Screen and personalised app theming.
           </p>
 
           <div class="plus-features">
@@ -1291,6 +1387,42 @@
               <div class="plus-feature-icon">⚡</div>
               <div class="plus-feature-name">Always Up to Date</div>
               <div class="plus-feature-desc">Live Activities update in real time so you never miss a bus.</div>
+            </div>
+            <div class="plus-feature-item">
+              <div class="plus-feature-icon">🎨</div>
+              <div class="plus-feature-name">App Theming</div>
+              <div class="plus-feature-desc">Make it yours — choose a custom colour for map annotations and UI accents.</div>
+            </div>
+          </div>
+
+          <!-- App Theming Interactive Demo -->
+          <div class="theming-showcase">
+            <p class="theming-label">Pick your annotation colour</p>
+            <div class="theming-map" id="theming-map" aria-label="Interactive map preview showing coloured bus stop annotations">
+              <div class="map-marker" style="top:34%;left:24%;">
+                <div class="map-pin"></div>
+                <span class="map-pin-label">City Hall</span>
+              </div>
+              <div class="map-marker" style="top:60%;left:56%;">
+                <div class="map-pin"></div>
+                <span class="map-pin-label">Raffles Place</span>
+              </div>
+              <div class="map-marker" style="top:22%;left:68%;">
+                <div class="map-pin"></div>
+                <span class="map-pin-label">Esplanade</span>
+              </div>
+              <div class="map-marker" style="top:72%;left:31%;">
+                <div class="map-pin"></div>
+                <span class="map-pin-label">Clarke Quay</span>
+              </div>
+            </div>
+            <div class="theming-swatches" role="radiogroup" aria-label="Annotation colour">
+              <button class="swatch swatch-active" data-color="#FF9500" aria-label="Orange" aria-pressed="true"  style="background:#FF9500;"></button>
+              <button class="swatch"               data-color="#007AFF" aria-label="Blue"   aria-pressed="false" style="background:#007AFF;"></button>
+              <button class="swatch"               data-color="#34C759" aria-label="Green"  aria-pressed="false" style="background:#34C759;"></button>
+              <button class="swatch"               data-color="#AF52DE" aria-label="Purple" aria-pressed="false" style="background:#AF52DE;"></button>
+              <button class="swatch"               data-color="#FF2D55" aria-label="Pink"   aria-pressed="false" style="background:#FF2D55;"></button>
+              <button class="swatch"               data-color="#5AC8FA" aria-label="Teal"   aria-pressed="false" style="background:#5AC8FA;"></button>
             </div>
           </div>
 
@@ -1389,6 +1521,23 @@
           }
         });
       });
+
+      // App Theming — colour swatch interaction
+      const themingMap = document.getElementById('theming-map');
+      if (themingMap) {
+        const swatches = themingMap.closest('.theming-showcase').querySelectorAll('.swatch');
+        swatches.forEach(function (swatch) {
+          swatch.addEventListener('click', function () {
+            swatches.forEach(function (s) {
+              s.classList.remove('swatch-active');
+              s.setAttribute('aria-pressed', 'false');
+            });
+            this.classList.add('swatch-active');
+            this.setAttribute('aria-pressed', 'true');
+            themingMap.style.setProperty('--annotation-color', this.dataset.color);
+          });
+        });
+      }
     })();
   </script>
 </body>
